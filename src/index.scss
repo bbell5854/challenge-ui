@@ -10,7 +10,8 @@ $root-node-primary-color: rgba(76, 150, 182, 1);
 $root-node-secondary-color: rgba(69, 134, 162, 1);
 $factory-node-color: #333;
 $child-node-color: #555;
-$bounds-background-color: #777;
+$bounds-bg-color: #777;
+$modal-bg-color: rgba(0, 0, 0, .85);
 
 .root-node {
   &__title {
@@ -52,7 +53,7 @@ $bounds-background-color: #777;
   }
 
   &__bounds {
-    background-color: $bounds-background-color;
+    background: $bounds-bg-color;
     border-radius: 100px;
     color: $pure-white;
     float: right;
@@ -96,5 +97,47 @@ $bounds-background-color: #777;
     content: '_';
     position: relative;
     top: -8px;
+  }
+}
+
+.factory-modal {
+  align-items: center;
+  background-color: $modal-bg-color;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 999999;
+
+  &__title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  &__form {
+    background: $pure-white;
+    border-radius: 10px;
+    padding: 50px 0;
+    text-align: center;
+    width: 300px;
+  }
+
+  &__input {
+    margin: 10px;
+  }
+
+  label {
+    display: none;
+  }
+
+  input {
+    width: 80%;
+  }
+
+  button {
+    
   }
 }

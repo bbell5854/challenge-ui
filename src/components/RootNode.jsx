@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FactoryNode from './FactoryNode';
+import FactoryModal from './FactoryModal';
 
 class RootNode extends Component {
   constructor() {
@@ -28,6 +29,7 @@ class RootNode extends Component {
 
     return (
       <div className="root-node">
+        <FactoryModal action="Create"/>
         <div className="root-node__title">{name}</div>
         <ul className="root-node__children">
           {factoryNodes.map(factoryData => (
