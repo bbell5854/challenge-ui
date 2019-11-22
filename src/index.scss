@@ -1,16 +1,69 @@
-// css reset
 * {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
 }
 
+$pathColor: #AAA;
+$rootNodeBackground: linear-gradient(180deg, rgba(76,150,182,1) 0%, rgba(69,134,162,1) 100%);
+$factoryNodeColor: #333;
+$childNodeColor: #555;
+
 .root-node {
   &__title {
-    background: linear-gradient(180deg, rgba(76,150,182,1) 0%, rgba(69,134,162,1) 100%);
-    margin: 2rem 0;
-    padding: .5rem 2rem;
+    background: $rootNodeBackground;
+    margin: 10px 0 5px;
+    padding: 6px 24px;
     color: white;
     font-weight: 600;
+  }
+}
+
+.factory-node {
+  color: $factoryNodeColor;
+
+  &__title {
+    display: inline-block;
+    font-weight: 600;
+    margin: 5px 0;
+    padding: 5px 10px;
+  }
+}
+
+.child-node {
+  color: $childNodeColor;
+
+  &__title {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 5px 10px;
+  }
+}
+
+.node-path {
+  &:before {
+    position: relative;
+    top: -7px;
+    color: $pathColor;
+    content: '_';
+  }
+}
+
+.node-children {
+  position: relative;
+  margin: 0 0 0 40px;
+  list-style-type: none;
+
+  &:before {
+    position: absolute;
+    top: -5px;
+    left: -1px;
+    height: calc(100% - 13px);
+    border-left: 1px solid $pathColor;
+    content: '';
+  }
+
+  &:last-child {
+    margin-bottom: 20px;
   }
 }
