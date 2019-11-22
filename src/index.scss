@@ -1,0 +1,16 @@
+// css reset
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.root-node {
+  &__title {
+    background: linear-gradient(180deg, rgba(76,150,182,1) 0%, rgba(69,134,162,1) 100%);
+    margin: 2rem 0;
+    padding: .5rem 2rem;
+    color: white;
+    font-weight: 600;
+  }
+}
