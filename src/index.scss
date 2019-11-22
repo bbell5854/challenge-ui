@@ -10,6 +10,7 @@ $root-node-primary-color: rgba(76, 150, 182, 1);
 $root-node-secondary-color: rgba(69, 134, 162, 1);
 $factory-node-color: #333;
 $child-node-color: #555;
+$bounds-background-color: #777;
 
 .root-node {
   &__title {
@@ -19,16 +20,63 @@ $child-node-color: #555;
     margin: 10px 0 5px;
     padding: 6px 24px;
   }
+
+  &__children {
+    list-style-type: none;
+    margin: 0 0 0 40px;
+    position: relative;
+
+    &::before {
+      border-left: 1px solid $path-color;
+      content: '';
+      height: calc(100% - 15px);
+      left: -1px;
+      position: absolute;
+      top: -5px;
+    }
+  }
 }
 
 .factory-node {
   color: $factory-node-color;
 
-  &__title {
+  &__title-wrapper {
     display: inline-block;
+    width: 350px;
+  }
+
+  &__title {
     font-weight: 600;
     margin: 5px 0;
     padding: 5px 10px;
+  }
+
+  &__bounds {
+    background-color: $bounds-background-color;
+    border-radius: 100px;
+    color: $pure-white;
+    float: right;
+    font-weight: 600;
+    padding: 1px 10px;
+  }
+
+  &__children {
+    list-style-type: none;
+    margin: 0 0 0 40px;
+    position: relative;
+
+    &::before {
+      border-left: 1px solid $path-color;
+      content: '';
+      height: calc(100% - 23px);
+      left: -1px;
+      position: absolute;
+      top: 4px;
+    }
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
   }
 }
 
@@ -47,25 +95,6 @@ $child-node-color: #555;
     color: $path-color;
     content: '_';
     position: relative;
-    top: -7px;
-  }
-}
-
-.node-children {
-  list-style-type: none;
-  margin: 0 0 0 40px;
-  position: relative;
-
-  &::before {
-    border-left: 1px solid $path-color;
-    content: '';
-    height: calc(100% - 13px);
-    left: -1px;
-    position: absolute;
-    top: -5px;
-  }
-
-  &:last-child {
-    margin-bottom: 20px;
+    top: -8px;
   }
 }

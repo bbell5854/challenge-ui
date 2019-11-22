@@ -29,7 +29,7 @@ class RootNode extends Component {
     return (
       <div className="root-node">
         <div className="root-node__title">{name}</div>
-        <ul className="root-node__children node-children">
+        <ul className="root-node__children">
           {factoryNodes.map(factoryData => (
             <FactoryNode factoryData={factoryData} />
           ))}
