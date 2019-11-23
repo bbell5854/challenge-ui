@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import FactoryNode from './FactoryNode';
 import FactoryModal from './FactoryModal';
+import ServerError from './ServerError';
+import io from 'socket.io-client';
 import Button from 'react-bootstrap/Button';
 import { MODAL_ACTION_CREATE, MODAL_ACTION_EDIT } from '../constants/actions';
+import {
+  FACTORY_CREATE_TOPIC,
+  FACTORY_UPDATE_TOPIC,
+  FACTORY_DISABLE_TOPIC,
+  SESSION_EMIT_TOPIC,
+  ERROR_RESPONSE_TOPIC
+} from '../constants/topics';
+
+const SERVER_HOST = 'localhost:8080';
 
 class RootNode extends Component {
   constructor() {
@@ -12,26 +23,40 @@ class RootNode extends Component {
       modal: {
         active: false
       },
-      factoryNodes: [
-        {
-          factoryId: '1',
-          name: 'Brad',
-          count: 4,
-          lowerBound: 1,
-          upperBound: 100,
-          childNodes: [1, 2, 3, 4]
-        },
-        {
-          factoryId: '2',
-          name: 'Brad2',
-          count: 3,
-          lowerBound: 10,
-          upperBound: 25,
-          childNodes: [10, 12, 13]
-        }
-      ]
+      factoryNodes: []
     };
   }
+
+  componentDidMount = () => {
+    this.socket = io(SERVER_HOST);
+    this.socket.on(SESSION_EMIT_TOPIC, this.sessionMegaphone);
+    // TODO: Add Error component and display
+    this.socket.on(ERROR_RESPONSE_TOPIC, this.setServerError);
+  };
+
+  sessionMegaphone = payload => {
+    this.setState({
+      factoryNodes: payload
+    });
+  };
+
+  setServerError = payload => {
+    this.setState({
+      serverError: payload
+    });
+  };
+
+  closeError = () => {
+    this.setServerError(undefined);
+  };
+
+  emitSocketEvent = (topic = '', payload = {}) => {
+    if (!topic.length) {
+      throw new Error('Invalid topic passed in');
+    }
+
+    this.socket.emit(topic, payload);
+  };
 
   hideModal = () => {
     this.setState({
@@ -52,7 +77,7 @@ class RootNode extends Component {
 
   showEditModal = factoryId => {
     const foundNode = this.state.factoryNodes.find(
-      e => (e.factoryId === factoryId)
+      e => e.factoryId === factoryId
     );
 
     const selectedNode = Object.assign({}, foundNode);
@@ -67,19 +92,19 @@ class RootNode extends Component {
   };
 
   createFactory = factoryData => {
-    console.log('HOTDOGcreate', factoryData);
+    this.emitSocketEvent(FACTORY_CREATE_TOPIC, factoryData);
   };
 
   updateFactory = factoryData => {
-    console.log('HOTDOGupdate', factoryData);
+    this.emitSocketEvent(FACTORY_UPDATE_TOPIC, factoryData);
   };
 
   deleteFactory = factoryId => {
-    console.log('HOTDOGdelete', factoryId);
+    this.emitSocketEvent(FACTORY_DISABLE_TOPIC, { factoryId });
   };
 
-  render() {
-    const { name, factoryNodes, modal } = this.state;
+  render = () => {
+    const { name, factoryNodes, modal, serverError } = this.state;
 
     return (
       <div className="root-node">
@@ -113,9 +138,15 @@ class RootNode extends Component {
             deleteFactory={this.deleteFactory}
           />
         )}
+        {serverError && serverError.message && (
+          <ServerError
+            message={serverError.message}
+            closeError={this.closeError}
+          />
+        )}
       </div>
     );
-  }
+  };
 }
 
 export default RootNode;

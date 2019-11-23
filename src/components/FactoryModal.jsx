@@ -50,9 +50,10 @@ class FactoryModal extends Component {
   };
 
   handleDelete = () => {
-    const { modalData, deleteFactory } = this.props;
+    const { modalData, deleteFactory, hideModal } = this.props;
 
     deleteFactory(modalData.selectedNode.factoryId);
+    hideModal();
   };
 
   validateInputs = factoryData => {
@@ -91,7 +92,7 @@ class FactoryModal extends Component {
     return errorFound;
   };
 
-  render() {
+  render = () => {
     const { errors } = this.state;
     const { hideModal } = this.props;
     const { action, selectedNode } = this.props.modalData;

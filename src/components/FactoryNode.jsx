@@ -16,6 +16,8 @@ const FactoryNode = props => {
     showEditModal(factoryId);
   }
 
+  const sortedChildNodes = childNodes.sort((a, b) => a - b);
+
   return (
     <li className="factory-node node-path">
       <div
@@ -26,8 +28,8 @@ const FactoryNode = props => {
         <span className="factory-node__bounds">{`${lowerBound} : ${upperBound}`}</span>
       </div>
       <ol className="factory-node__children">
-        {childNodes &&
-          childNodes.map((value, key) => <ChildNode key={key} value={value} />)}
+        {sortedChildNodes &&
+          sortedChildNodes.map((value, key) => <ChildNode key={key} value={value} />)}
       </ol>
     </li>
   );
