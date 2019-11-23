@@ -2,16 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import ChildNode from './ChildNode';
 
-function FactoryNode(props) {
-  const { name, upperBound, lowerBound, childNodes } = props.factoryData;
+const FactoryNode = (props) => {
+  const { showEditModal } = props;
+  const { factoryId, name, upperBound, lowerBound, childNodes } = props.factoryData;
+
+  function handleShowEditModal() {
+    showEditModal(factoryId);
+  }
+
   return (
     <li className="factory-node node-path">
-      <div className="factory-node__title-wrapper">
+      <div className="factory-node__title-wrapper" onClick={handleShowEditModal}>
         <span className="factory-node__title">{name}</span>
         <span className="factory-node__bounds">{`${lowerBound} : ${upperBound}`}</span>
       </div>
       <ol className="factory-node__children">
-        {childNodes.map(node => <ChildNode value={node} />)}
+        {childNodes && childNodes.map((key, value) => <ChildNode key={key} value={value} />)}
       </ol>
     </li>
   )
@@ -19,6 +25,7 @@ function FactoryNode(props) {
 
 FactoryNode.propTypes = {
   factoryData: PropTypes.shape({
+    factoryId: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     upperBound: PropTypes.number.isRequired,
     lowerBound: PropTypes.number.isRequired,

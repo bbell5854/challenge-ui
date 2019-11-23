@@ -1,3 +1,5 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
 * {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
@@ -9,6 +11,7 @@ $path-color: #aaa;
 $root-node-primary-color: rgba(76, 150, 182, 1);
 $root-node-secondary-color: rgba(69, 134, 162, 1);
 $factory-node-color: #333;
+$factory-node-hover-color: #D8E4F1;
 $child-node-color: #555;
 $bounds-bg-color: #777;
 $modal-bg-color: rgba(0, 0, 0, .85);
@@ -42,8 +45,14 @@ $modal-bg-color: rgba(0, 0, 0, .85);
   color: $factory-node-color;
 
   &__title-wrapper {
+    border-radius: 40px 100px 100px 40px;
     display: inline-block;
     width: 350px;
+    z-index: 99;
+
+    &:hover {
+      background-color: $factory-node-hover-color;
+    }
   }
 
   &__title {
@@ -102,14 +111,26 @@ $modal-bg-color: rgba(0, 0, 0, .85);
 
 .factory-modal {
   align-items: center;
-  background-color: $modal-bg-color;
   display: flex;
   height: 100vh;
   justify-content: center;
   position: absolute;
   top: 0;
   width: 100vw;
-  z-index: 999999;
+  z-index: 9999;
+
+  &__background {
+    background-color: $modal-bg-color;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+  }
+
+  &__close {
+    position: relative;
+    top: -25px;
+    left: -370px;
+  }
 
   &__title {
     font-size: 18px;
@@ -120,24 +141,13 @@ $modal-bg-color: rgba(0, 0, 0, .85);
   &__form {
     background: $pure-white;
     border-radius: 10px;
-    padding: 50px 0;
+    padding: 50px 50px;
     text-align: center;
-    width: 300px;
-  }
-
-  &__input {
-    margin: 10px;
-  }
-
-  label {
-    display: none;
-  }
-
-  input {
-    width: 80%;
+    width: 50%;
+    z-index: 99999;
   }
 
   button {
-    
+    margin: 0 10px;
   }
 }

@@ -1,34 +1,58 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import ActionConstants from '../constants/actions';
 
-function FactoryModal(props) {
-  const { action } = props;
+const FactoryModal = (props) => {
+  const { hideModal, handleSubmit, handleDelete } = props;
+  const { action } = props.modalData;
 
   return (
     <div className="factory-modal">
-      <form className="factory-modal__form">
+      <div className="factory-modal__background" onClick={hideModal} />
+      <Form className="factory-modal__form" onSubmit={handleSubmit}>
+        <button type="button" className="factory-modal__close close" onClick={hideModal}>
+          <span aria-hidden="true">&times;</span>
+        </button>
         <div className="factory-modal__title">{action} Factory</div>
-        <div className="factory-modal__input">
-          <input type="input" name="name" id="name" placeholder="Name" />
-          <label for="name">Name</label>
-        </div>
-        <div className="factory-modal__input">
-          <input type="input" name="count" id="count" placeholder="Count" />
-          <label for="count">Count</label>
-        </div>
-        <div className="factory-modal__input">
-          <input type="input" name="lowerBound" id="lowerBound" placeholder="Lower Bound" />
-          <label for="lowerBound">Lower Bound</label>
-        </div>
-        <div className="factory-modal__input">
-          <input type="input" name="upperBound" id="upperBound" placeholder="Upper Bound" />
-          <label for="upperBound">Upper Bound</label>
-        </div>
-        <div className="factory-modal__submit">
-          <button type="submit" name="submit">{action}</button>
-        </div>
-      </form>
+        <Form.Group controlId="factory-name">
+          <Form.Control type="input" placeholder="Enter Name" />
+        </Form.Group>
+        <Form.Group controlId="factory-count">
+          <Form.Control type="input" placeholder="Enter Node Count" />
+          <Form.Text className="text-muted"></Form.Text>
+        </Form.Group>
+        <Form.Group controlId="factory-lower-bound">
+          <Form.Control type="input" placeholder="Enter Lower Bound" />
+        </Form.Group>
+        <Form.Group controlId="factory-upper-bound">
+          <Form.Control type="input" placeholder="Enter Upper Name" />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+        {action === ActionConstants.MODAL_ACTION_EDIT && (
+          <Button variant="danger" type="button" onClick={handleDelete}>
+            Delete
+          </Button>
+        )}
+      </Form>
     </div>
-  )
+  );
 }
 
-export default FactoryModal
+FactoryModal.propTypes = {
+  modalData: PropTypes.shape({
+    action: PropTypes.string,
+    factoryId: PropTypes.string
+  })
+};
+
+FactoryModal.defaultProps = {
+  modalData: {
+    action: ActionConstants.MODAL_ACTION_CREATE
+  }
+};
+
+export default FactoryModal;
