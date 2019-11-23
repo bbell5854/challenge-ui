@@ -8,21 +8,26 @@
 
 $pure-white: #fff;
 $path-color: #aaa;
-$root-node-primary-color: rgba(76, 150, 182, 1);
-$root-node-secondary-color: rgba(69, 134, 162, 1);
+$root-node-bg-color: #2c79ef;
 $factory-node-color: #333;
-$factory-node-hover-color: #D8E4F1;
+$factory-node-bg-color: #659df0;
 $child-node-color: #555;
-$bounds-bg-color: #777;
 $modal-bg-color: rgba(0, 0, 0, .85);
+$modal-label-color: #555;
 
 .root-node {
   &__title {
-    background: linear-gradient(180deg, $root-node-primary-color 0%, $root-node-secondary-color 100%);
+    align-items: center;
+    background: $root-node-bg-color;
     color: $pure-white;
-    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
     margin: 10px 0 5px;
     padding: 6px 24px;
+
+    button:hover {
+      color: $root-node-bg-color;
+    }
   }
 
   &__children {
@@ -45,28 +50,28 @@ $modal-bg-color: rgba(0, 0, 0, .85);
   color: $factory-node-color;
 
   &__title-wrapper {
-    border-radius: 40px 100px 100px 40px;
+    border: $path-color 1px solid;
+    border-radius: 5px;
     display: inline-block;
     width: 350px;
     z-index: 99;
 
     &:hover {
-      background-color: $factory-node-hover-color;
+      background-color: $factory-node-bg-color;
+      border-color: $pure-white;
+      color: $pure-white;
+      transition: 150ms ease-in;
     }
   }
 
   &__title {
-    font-weight: 600;
     margin: 5px 0;
     padding: 5px 10px;
   }
 
   &__bounds {
-    background: $bounds-bg-color;
-    border-radius: 100px;
-    color: $pure-white;
     float: right;
-    font-weight: 600;
+    font-style: italic;
     padding: 1px 10px;
   }
 
@@ -78,10 +83,9 @@ $modal-bg-color: rgba(0, 0, 0, .85);
     &::before {
       border-left: 1px solid $path-color;
       content: '';
-      height: calc(100% - 23px);
+      height: calc(100% - 21px);
       left: -1px;
       position: absolute;
-      top: 4px;
     }
 
     &:last-child {
@@ -105,7 +109,7 @@ $modal-bg-color: rgba(0, 0, 0, .85);
     color: $path-color;
     content: '_';
     position: relative;
-    top: -8px;
+    top: -7px;
   }
 }
 
@@ -126,12 +130,6 @@ $modal-bg-color: rgba(0, 0, 0, .85);
     width: 100%;
   }
 
-  &__close {
-    position: relative;
-    top: -25px;
-    left: -370px;
-  }
-
   &__title {
     font-size: 18px;
     margin-bottom: 20px;
@@ -141,13 +139,21 @@ $modal-bg-color: rgba(0, 0, 0, .85);
   &__form {
     background: $pure-white;
     border-radius: 10px;
-    padding: 50px 50px;
-    text-align: center;
+    padding: 50px;
     width: 50%;
     z-index: 99999;
   }
 
+  &__input {
+    color: $modal-label-color;
+    margin-bottom: 24px;
+  }
+
   button {
     margin: 0 10px;
+  }
+
+  &__button-wrapper {
+    text-align: center;
   }
 }

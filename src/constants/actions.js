@@ -1,4 +1,2 @@
-export default {
-  MODAL_ACTION_CREATE: 'Create',
-  MODAL_ACTION_EDIT: 'Edit'
-};
+export const MODAL_ACTION_CREATE = 'Create';
+export const MODAL_ACTION_EDIT = 'Edit';

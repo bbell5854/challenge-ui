@@ -8,7 +8,7 @@ const ChildNode = ({ value }) => (
 );
 
 ChildNode.propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired
 };
 
 export default ChildNode;
