@@ -14,7 +14,7 @@ import {
   ERROR_RESPONSE_TOPIC
 } from '../constants/topics';
 
-const SERVER_HOST = process.env.SERVER_HOST;
+const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
 const SOCKET_CONNECTION_TIMEOUT = 2000;
 
 class RootNode extends Component {

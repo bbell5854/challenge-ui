@@ -1,6 +1,12 @@
 # challenge-ui
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Start debugging the app
+
+To start the UI and connect to the server, run the command below with the hostname:port as the appropriate env variable.
+
+`REACT_APP_SERVER_HOST={hostname:port} npm start`
+
 ## Available Scripts
 
 In the project directory, you can run:
