@@ -155,7 +155,8 @@ class FactoryModal extends Component {
               isInvalid={errors.lowerBound}
             />
             <Form.Control.Feedback type="invalid">
-              Lower bound must be a positive number lesser or equal to upper bound.
+              Lower bound must be a positive number lesser or equal to upper
+              bound.
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group
@@ -172,7 +173,8 @@ class FactoryModal extends Component {
               isInvalid={errors.upperBound}
             />
             <Form.Control.Feedback type="invalid">
-              Upper bound must be a positive number greater or equal to lower bound.
+              Upper bound must be a positive number greater or equal to lower
+              bound.
             </Form.Control.Feedback>
           </Form.Group>
           <div className="factory-modal__button-wrapper">
@@ -192,7 +194,7 @@ class FactoryModal extends Component {
         </Form>
       </div>
     );
-  }
+  };
 }
 
 FactoryModal.propTypes = {

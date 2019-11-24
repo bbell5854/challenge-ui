@@ -30,7 +30,6 @@ class RootNode extends Component {
   componentDidMount = () => {
     this.socket = io(SERVER_HOST);
     this.socket.on(SESSION_EMIT_TOPIC, this.sessionMegaphone);
-    // TODO: Add Error component and display
     this.socket.on(ERROR_RESPONSE_TOPIC, this.setServerError);
   };
 
