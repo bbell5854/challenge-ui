@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 import Button from 'react-bootstrap/Button';
 import { MODAL_ACTION_CREATE, MODAL_ACTION_EDIT } from '../constants/actions';
 import {
+  CONNECT_TOPIC,
   FACTORY_CREATE_TOPIC,
   FACTORY_UPDATE_TOPIC,
   FACTORY_DISABLE_TOPIC,
@@ -14,6 +15,7 @@ import {
 } from '../constants/topics';
 
 const SERVER_HOST = process.env.SERVER_HOST;
+const SOCKET_CONNECTION_TIMEOUT = 2000;
 
 class RootNode extends Component {
   constructor() {
@@ -28,9 +30,16 @@ class RootNode extends Component {
   }
 
   componentDidMount = () => {
+    const connectionTimeout = setTimeout(() => {
+      this.setServerError({ message: 'We seem to be having issues connecting to the server. Please try again later.' });
+    }, SOCKET_CONNECTION_TIMEOUT);
+
     this.socket = io(SERVER_HOST);
     this.socket.on(SESSION_EMIT_TOPIC, this.sessionMegaphone);
     this.socket.on(ERROR_RESPONSE_TOPIC, this.setServerError);
+    this.socket.on(CONNECT_TOPIC, () => {
+      clearTimeout(connectionTimeout);
+    });
   };
 
   sessionMegaphone = payload => {
