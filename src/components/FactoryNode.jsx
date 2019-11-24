@@ -29,7 +29,9 @@ const FactoryNode = props => {
       </div>
       <ol className="factory-node__children">
         {sortedChildNodes &&
-          sortedChildNodes.map((value, key) => <ChildNode key={key} value={value} />)}
+          sortedChildNodes.map((value, key) => (
+            <ChildNode key={key} value={value} />
+          ))}
       </ol>
     </li>
   );
