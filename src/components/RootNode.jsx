@@ -13,7 +13,7 @@ import {
   ERROR_RESPONSE_TOPIC
 } from '../constants/topics';
 
-const SERVER_HOST = 'localhost:8080';
+const SERVER_HOST = process.env.SERVER_HOST;
 
 class RootNode extends Component {
   constructor() {
